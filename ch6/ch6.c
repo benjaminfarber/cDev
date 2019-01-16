@@ -5,32 +5,18 @@ Ben Farber
 
 #include <stdio.h>
 
-void space();
-
 int main() {
-    int array1[5] = {0, 1, 2, 3, 4};
-    int array2[5];
-    for (int i = 0; i < 5; i++) {
-        array2[i] = i;
+    int x;
+    int index = -1;
+    int array[5];
+    for (x = 0; x < 5; x++) {
+        array[x] = (x + 5);
     }
-    int array3[5] = {0};
-    printf("%d", array1[1]);
-    space();
-    printf("%d", array2[0]);
-    space();
-    for (int i = 0; i < 5; i++) {
-        printf("\nThe value of array1 at index %d is %d", i, array1[i]);
-    }
-    for (int i = 0; i < 5; i++) {
-        printf("\nThe value of array2 at index %d is %d", i, array2[i]);
-    }
-    for (int i = 0; i < 5; i++) {
-        printf("\nThe value of array3 at index %d is %d", i, array3[i]);
-    }
-    space();
-    return 0;
-}
+    do {
+        printf("\nEnter a valid index (0-4): ");
+        scanf("%d", &index);
+    } while (index < 0 || index > 4);
 
-void space() {
-    printf("\n\n");
+    printf("\nThe value of index %d is %d\n", index, array[index]);
+    return 0;
 }
