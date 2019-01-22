@@ -1,6 +1,6 @@
 /*
 Name: Ben Farber
-Date: 01.21.19
+Date: 01.22.19
 Lab: 3
 Program Description: A calculator that adds, subtracts, 
     multiplies, divides, calculates the modulus, and 
@@ -11,13 +11,6 @@ Program Description: A calculator that adds, subtracts,
 #include <stdlib.h>
 #include <time.h>
 
-void get2Numbers();
-void add2Ints(int, int);
-void sub2Ints(int, int);
-void mul2Ints(int, int);
-void div2Floats(float, float);
-void mod2Ints(int, int);
-void isPrime(int);
 void pause(int);
 
 int main() {
@@ -40,31 +33,21 @@ int main() {
         switch(operationChoice) {
             case 1:
                 printf("~ADDITION~\n\n");
-                if (get2Numbers() == 0) {
-                    add2Ints(num1, num2);
-                } else {
-                    add2Floats()
-                }
                 break;
             case 2:
-                printf("~SUBTRACTION~\n\n");
-                
+                printf("~SUBTRACTION~\n\n");                
                 break;
             case 3:
-                printf("~MULTIPLICATION~\n\n");
-                
+                printf("~MULTIPLICATION~\n\n");               
                 break;
             case 4:
-                printf("~DIVISION~\n\n");
-                
+                printf("~DIVISION~\n\n");            
                 break;
             case 5:
-                printf("~MODULUS~\n\n");
-                
+                printf("~MODULUS~\n\n"); 
                 break;
             case 6:
                 printf("~PRIME~\n\n");
-                
                 break;
             case 7:
                 printf("Exiting Calculator...\n\n");
@@ -75,44 +58,6 @@ int main() {
         }
         pause(2);
     } while (operationChoice != 7);
-}
-int get2Numbers() {
-    printf("Enter a number: ");
-    scanf("%f", num1);
-    int num1int = num1;
-    printf("Enter a second number: ");
-    scanf("%f", num2);
-    int num2int = num2;
-    // if one of the numbers is float return 1
-    if ((num1 - num1int != 0 || num2 - num2int != 0) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
-void add2Ints(int add1, int add2) {
-    printf("%d + %d = %d\n", add1, add2, add1 + add2);
-}
-
-void sub2Ints(int sub1, int sub2) {
-    printf("%d - %d = %d\n", sub1, sub2, sub1 - sub2);
-}
-
-void mul2Ints(int mul1, int mul2) {
-    printf("%d x %d = %d\n", mul1, mul2, mul1 * mul2);
-}
-
-void div2Floats(float div1, float div2) {
-    printf("%0.2f / %0.2f = %0.2f\n", div1, div2, div1 / div2);
-}
-
-void mod2Ints(int mod1, int mod2) {
-
-}
-
-void isPrime(int primeTestNumber) {
-
 }
 
 void pause(int pauseTime) {
