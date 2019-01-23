@@ -9,7 +9,8 @@ Program Description: A calculator that adds, subtracts, multiplies, divides,
 #include <stdio.h>
 #include <stdlib.h>
 
-// Function prototypes
+// FUNCTION PROTOTYPES
+
 void displayCalculatorOperations(void);
 int get2Numbers(void);
 int get1Number(void);
@@ -18,8 +19,10 @@ void sub2Numbers(void);
 void mult2Numbers(void);
 void div2Numbers(void);
 void mod2Numbers(void);
+void primeTest(void);
 
-// Global Variables
+// GLOBAL VARIABLES
+
 int int1 = 0;
 int int2 = 0;
 int intAnswer = 0;
@@ -27,41 +30,45 @@ float float1 = 0.0;
 float float2 = 0.0;
 float floatAnswer = 0.0;
 
+// MAIN FUNCTION
+
 int main() {
+    printf("\n\t-- Welcome to the Calculator Program! --\n");
+    printf("\t\t-- by Ben Farber --\n");
     int operationChoice = 0;
     float operationChoiceInput = 0;
     do {
         displayCalculatorOperations();
         printf("\nPlease choose an operation: ");
         scanf("%f", &operationChoiceInput);
-        operationChoice = operationChoiceInput;
+        operationChoice = operationChoiceInput; // convert float input to integer
         if (operationChoiceInput - operationChoice != 0) {
             operationChoice = 0;
-        }
+        } // If input is a float, force switch to output default
         switch(operationChoice) {
             case 1:
-                printf("\n~ADDITION~\n\n");
+                printf("\n\t-- ADDITION --\n\n");
                 add2Numbers();
                 break;
             case 2:
-                printf("\n~SUBTRACTION~\n\n");
+                printf("\n\t-- SUBTRACTION --\n\n");
                 sub2Numbers();          
                 break;
             case 3:
-                printf("\n~MULTIPLICATION~\n\n");
+                printf("\n\t-- MULTIPLICATION --\n\n");
                 mult2Numbers();       
                 break;
             case 4:
-                printf("\n~DIVISION~\n\n"); 
+                printf("\n\t-- DIVISION --\n\n"); 
                 div2Numbers();  
                 break;
             case 5:
-                printf("\n~MODULUS~\n\n");
+                printf("\n\t-- MODULUS --\n\n");
                 mod2Numbers();
                 break;
             case 6:
-                printf("\n~PRIME~\n\n");
-                
+                printf("\n\t-- PRIME? --\n\n");
+                primeTest();
                 break;
             case 7:
                 printf("\nExiting Calculator...\n\n");
@@ -70,19 +77,21 @@ int main() {
                 printf("\nInvalid Response.\n");
                 break;
         }
-    } while (operationChoice != 7);
+    } while (operationChoice != 7); // Loops program unless a 7 is entered
     return 0;
 }
 
+// FUNCTION DEFINITIONS
+
 void displayCalculatorOperations(void) {
-    printf("\nCalculator Operations:\n");
-    printf("[1] Addition\n");
-    printf("[2] Subtraction\n");
-    printf("[3] Multiplication\n");
-    printf("[4] Division\n");
-    printf("[5] Modulus (integers only)\n");
-    printf("[6] Test if prime (Integers only\n");
-    printf("[7] Exit\n");
+    printf("\nCalculator Operations:\n\n");
+    printf("\t[1] Addition\n");
+    printf("\t[2] Subtraction\n");
+    printf("\t[3] Multiplication\n");
+    printf("\t[4] Division\n");
+    printf("\t[5] Modulus\n");
+    printf("\t[6] Prime Test\n");
+    printf("\t[7] Exit\n");
 }
 
 int get2Numbers(void) {
@@ -114,12 +123,13 @@ void add2Numbers(void) {
         printf("--------------------------\n");
         printf("%d + %d = %d\n", int1, int2, intAnswer);
         printf("--------------------------\n");
-    } else {
+    } // Add two integers
+    else {
         floatAnswer = float1 + float2;
         printf("--------------------------\n");
         printf("%0.1f + %0.1f = %0.1f\n", float1, float2, floatAnswer);
         printf("--------------------------\n");
-    }  
+    } // Add to floats
 }
 
 void sub2Numbers(void) {
@@ -128,12 +138,13 @@ void sub2Numbers(void) {
         printf("--------------------------\n");
         printf("%d - %d = %d\n", int1, int2, intAnswer);
         printf("--------------------------\n");
-    } else {
+    } // Subtract two integers
+    else {
         floatAnswer = float1 - float2;
         printf("--------------------------\n");
         printf("%0.1f - %0.1f = %0.1f\n", float1, float2, floatAnswer);
         printf("--------------------------\n");
-    }
+    } // Subtract two floats
 }
 
 void mult2Numbers(void) {
@@ -142,12 +153,13 @@ void mult2Numbers(void) {
         printf("--------------------------\n");
         printf("%d x %d = %d\n", int1, int2, intAnswer);
         printf("--------------------------\n");
-    } else {
+    } // Multiply two integers
+    else {
         floatAnswer = float1 * float2;
         printf("--------------------------\n");
         printf("%0.1f x %0.1f = %0.2f\n", float1, float2, floatAnswer);
         printf("--------------------------\n");
-    } 
+    } // Multiply two floats
 }
 
 void div2Numbers(void) {
@@ -156,13 +168,13 @@ void div2Numbers(void) {
         printf("--------------------------\n");
         printf("%0.0f / %0.0f = %0.2f\n", float1, float2, floatAnswer);
         printf("--------------------------\n");
-    }
+    } // Divide two floats but display inputs as integers
     else {
         floatAnswer = float1 / float2;
         printf("--------------------------\n");
         printf("%0.1f / %0.1f = %0.2f\n", float1, float2, floatAnswer);
         printf("--------------------------\n");
-    }
+    } // Divide two floats and display inputs as floats
 }
 
 void mod2Numbers(void) {
@@ -174,9 +186,25 @@ void mod2Numbers(void) {
             printf("--------------------------\n");
             printf("%d %% %d = %d\n", int1, int2, intAnswer);
             printf("--------------------------\n");
-        } else {
-            printf("You can only enter integers for the modulus operation.\n");
+        } // If inputs are integers, calculate the modulus of the two numbers
+        else {
+            printf("\nYou can only enter integers for the modulus operation.\n");
             printf("Try entering integers.\n\n");
-        }
-    } while (intCheck != 1);
+        } // If one or both of the inputs is not an integer, remind the user to enter integers
+    } while (intCheck != 1); // Prompt user to enter two numbers until both inputs are integers
+}
+
+void primeTest(void) {
+    int intCheck = 0;
+    do {
+        intCheck = get1Number();
+        if (intCheck == 1) {
+            // TODO: check if 'int1' is prime and
+            // display factors if it is not prime
+        } // If input is an integer, check if number is prime
+        else {
+            printf("\nYou can only enter an integer for the prime test operation.\n");
+            printf("Try entering an integer.\n\n");
+        } // If input is not an integer, remind the user to enter an integer
+    } while (intCheck != 1); // Promt user to enter a number until an integer is entered
 }
