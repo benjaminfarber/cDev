@@ -79,19 +79,21 @@ int main() {
         }
     } while (operationChoice != 7); // Loops program unless a 7 is entered
     return 0;
-}
+} 
+
+// END MAIN FUNCTION
 
 // FUNCTION DEFINITIONS
 
 void displayCalculatorOperations(void) {
     printf("\nCalculator Operations:\n\n");
-    printf("\t[1] Addition\n");
-    printf("\t[2] Subtraction\n");
-    printf("\t[3] Multiplication\n");
-    printf("\t[4] Division\n");
-    printf("\t[5] Modulus\n");
-    printf("\t[6] Prime Test\n");
-    printf("\t[7] Exit\n");
+    printf("[1] Addition\n");
+    printf("[2] Subtraction\n");
+    printf("[3] Multiplication\n");
+    printf("[4] Division\n");
+    printf("[5] Modulus\n");
+    printf("[6] Prime Test\n");
+    printf("[7] Exit\n");
 }
 
 int get2Numbers(void) {
@@ -108,7 +110,7 @@ int get2Numbers(void) {
 }
 
 int get1Number(void) {
-    printf("Enter a number (integers only): ");
+    printf("Enter a number: ");
     scanf("%f", &float1);
     int1 = float1;
     if (float1 - int1 == 0) 
@@ -196,14 +198,48 @@ void mod2Numbers(void) {
 
 void primeTest(void) {
     int intCheck = 0;
+    int isNotPrime = 0; // Set value to false
     do {
         intCheck = get1Number();
+        printf("\nChecking if %d is prime...\n\n", int1);
         if (intCheck == 1) {
-            // TODO: check if 'int1' is prime and
-            // display factors if it is not prime
+            if (int1 == 1) {
+                printf("--------------------------\n");
+                printf("%d is not prime.\n", int1);
+                printf("1 can only be divided by itself.\n");
+                printf("--------------------------\n");
+                isNotPrime = 1;
+            } // 1 is not a prime number
+            else if (int1 == 2) {
+                isNotPrime = 0;
+            } // 2 is a prime number
+            else if (int1 % 2 == 0 && int1 != 2) {
+                printf("--------------------------\n");
+                printf("%d is not prime.\n", int1);
+                printf("%d x 2 = %d\n", int1 / 2, int1);
+                printf("--------------------------\n");
+                isNotPrime = 1;
+            } // Even numbers (excluding 2) are not prime
+            else {
+                for (int denominatorInt = 2; denominatorInt < (int1 / 2); denominatorInt++) {
+                    if (int1 % denominatorInt == 0) {
+                        printf("--------------------------\n");
+                        printf("%d is not prime.\n", int1);
+                        printf("%d x %d = %d\n", denominatorInt, int1 / denominatorInt, int1);
+                        printf("--------------------------\n");
+                        isNotPrime = 1; // The input has been found to be not prime, so this becomes true
+                        break;
+                    } // Test if the input can be divided by all numbers between 2 and half the input
+                } // If the input cant be divided by numbers other than 1 and itself, it is prime
+            }
+            if (isNotPrime == 0) {
+                printf("--------------------------\n");
+                printf("%d is a prime number.\n", int1);
+                printf("--------------------------\n");
+            } // If no factors for the input are found, isNotPrime remains false (aka the number is prime)
         } // If input is an integer, check if number is prime
         else {
-            printf("\nYou can only enter an integer for the prime test operation.\n");
+            printf("\nYou can only enter an integer \nfor the prime test operation.\n");
             printf("Try entering an integer.\n\n");
         } // If input is not an integer, remind the user to enter an integer
     } while (intCheck != 1); // Promt user to enter a number until an integer is entered
