@@ -8,9 +8,10 @@ Program Description: A calculator that adds, subtracts, multiplies, divides,
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <stdbool.h>
 
-// FUNCTION PROTOTYPES
+// BEGIN FUNCTION PROTOTYPES
 
 void displayCalculatorOperations(void);
 void add2Numbers(float, float);
@@ -22,28 +23,36 @@ void primeTest(int);
 void calcFactorial(int);
 void calcPower(int, int);
 void calcAverage(int);
+void pause(int);
 
-// MAIN FUNCTION
+// END FUNCTION PROTOTYPES
+
+// BEGIN MAIN FUNCTION
 
 int main() {
 
-    // Define Variables
+    // BEGIN DEFINE VARIABLES
+
     float add1, add2;
     float sub1, sub2;
-float mult1, mult2;
-float div1, div2;
-int mod1, mod2;
-int primeArgument;
-int factorialArgument;
-int base, exponent;
-int averageCount;
-
+    float mult1, mult2;
+    float div1, div2;
+    int mod1, mod2;
+    int primeArgument;
+    int factorialArgument;
+    int base, exponent;
+    int averageCount;
+    char operationChoice;
+    
+    // END DEFINE VARIABLES
 
     printf("\n-- Welcome to the Calculator Program! --\n");
     printf("\t-- by Ben Farber --\n");
-    char operationChoice = '0';
+
     do {
+        operationChoice = '\0';
         displayCalculatorOperations();
+        printf("\nPlease choose an operation: ");
         scanf("%c", &operationChoice);
         switch(operationChoice) {
             case '1':
@@ -60,7 +69,7 @@ int averageCount;
                 scanf("%f", &sub1);
                 printf("\n%0.2f - ", sub1);
                 scanf("%f", &sub2);
-                subtract2Numbers(sub1, sub2);          
+                subtract2Numbers(sub1, sub2);       
                 break;
             case '3':                
                 printf("\n\t-- MULTIPLICATION --\n");
@@ -68,7 +77,7 @@ int averageCount;
                 scanf("%f", &mult1);
                 printf("\n%0.2f x ", mult1);
                 scanf("%f", &mult2);
-                multiply2Numbers(mult1, mult2);       
+                multiply2Numbers(mult1, mult2);     
                 break;
             case '4':                
                 printf("\n\t-- DIVISION --\n"); 
@@ -76,7 +85,7 @@ int averageCount;
                 scanf("%f", &div1);
                 printf("\n%0.2f / ", div1);
                 scanf("%f", &div2);
-                divide2Numbers(div1, div2);  
+                divide2Numbers(div1, div2);
                 break;
             case '5':                
                 printf("\n\t-- MODULUS --\n");
@@ -113,49 +122,62 @@ int averageCount;
                 scanf("%d", &averageCount);
                 calcAverage(averageCount);
                 break;
-            case 'q':
-                printf("\nExiting calculator . . .\n");
-                break;
-            default:
-                printf("\nInvalid Response.\n");
+            case 'Q':
+                printf("\nExiting calculator . . .\n\n");
                 break;
         }
-    } while (operationChoice != 'q'); // Loops program unless a 0 is entered
+        pause(1);
+        system("clear");
+    } while (operationChoice != 'Q'); // Loops program unless 'Q' is entered
     return 0;
 } 
 
 // END MAIN FUNCTION
 
-// FUNCTION DEFINITIONS
+// BEGIN FUNCTION DEFINITIONS
 
 void displayCalculatorOperations(void) {
-    printf("\nCalculator Operations:\n\n");
-    printf("[1] Addition\t\t[6] Prime Test\n");
-    printf("[2] Subtraction\t\t[7] Factorial\n");
-    printf("[3] Multiplication\t[8] Power\n");
-    printf("[4] Division\t\t[9] Function\n");
-    printf("[5] Modulus\t\t[q] Exit\n");
-    printf("\nPlease choose an operation: ");
+    printf(" _______________________________________ \n");
+    printf("|\t\t\t\t\t|\n");
+    printf("|\tCalculator Operations:\t\t|\n");
+    printf("|\t\t\t\t\t|\n");
+    printf("|   [1] Addition\t[6] Prime Test\t|\n");
+    printf("|   [2] Subtraction\t[7] Factorial\t|\n");
+    printf("|   [3] Multiplication\t[8] Power\t|\n");
+    printf("|   [4] Division\t[9] Function\t|\n");
+    printf("|   [5] Modulus\t\t[Q] Exit\t|\n");
+    printf("|\t\t\t\t\t|\n");
+    printf("|_______________________________________|\n\n");
 }
 
 void add2Numbers(float num1, float num2) {
-
+    float answer;
+    answer = num1 + num2;
+    printf("\nAnswer = %0.2f\n", answer);
 }
 
 void subtract2Numbers(float num1, float num2) {
-
+    float answer;
+    answer = num1 - num2;
+    printf("\nAnswer = %0.2f\n", answer);
 }
 
 void multiply2Numbers(float num1, float num2) {
-
+    float answer;
+    answer = num1 * num2;
+    printf("\nAnswer = %0.2f\n", answer);
 }
 
 void divide2Numbers(float num1, float num2) {
-
+    float answer;
+    answer = num1 / num2;
+    printf("\nAnswer = %0.2f\n", answer);
 }
 
 void modulus2Numbers(int num1, int num2) {
-
+    float answer;
+    answer = num1 % num2;
+    printf("\nAnswer = %0.2f\n", answer);
 }
 
 void primeTest(int testNumber) {
@@ -173,3 +195,14 @@ void calcPower(int baseNum, int exponentNum) {
 void calcAverage(int size) {
 
 }
+
+void pause(int inNum) {
+    int currentTime = 0;
+    int elapsedTime = 0;
+    currentTime = time(NULL);
+    do {
+        elapsedTime = time(NULL);
+    } while ((elapsedTime - currentTime) < inNum);
+}
+
+// END FUNCTION DEFINITIONS
