@@ -142,8 +142,8 @@ void displayCalculatorOperations(void) {
     printf("|   [1] Addition\t[6] Prime Test\t|\n");
     printf("|   [2] Subtraction\t[7] Factorial\t|\n");
     printf("|   [3] Multiplication\t[8] Power\t|\n");
-    printf("|   [4] Division\t[9] Function\t|\n");
-    printf("|   [5] Modulus\t\t[Q] Exit\t|\n");
+    printf("|   [4] Division\t[9] Average\t|\n");
+    printf("|   [5] Modulus\t\t[0] Exit\t|\n");
     printf("|\t\t\t\t\t|\n");
     printf("|_______________________________________|\n\n");
     printf("\nPlease choose an operation: ");
@@ -180,7 +180,30 @@ void modulus2Numbers(int num1, int num2) {
 }
 
 void primeTest(int testNumber) {
-
+    int p;
+    int i;
+    int primes[testNumber];
+    int primeIndex = 2;
+    bool isPrime;
+    primes[0] = 2;
+    primes[1] = 3;
+    for (p = 5; p <= testNumber; p += 2) {
+        isPrime = true;
+        for (i = 1; isPrime && p / primes[i] >= primes[i]; i++) {
+            if (p % primes[i] == 0)
+                isPrime = false;
+        }
+        if (isPrime == true) {
+            primes[primeIndex] = p;
+            ++primeIndex;
+        }
+    }
+    if (testNumber == isPrime) {
+        printf("\n%d is prime", testNumber);
+    }
+    else {
+        printf("\n%d is not prime", testNumber);
+    }
 }
 
 void calcFactorial(int num) {
@@ -192,6 +215,17 @@ void calcPower(int baseNum, int exponentNum) {
 }
 
 void calcAverage(int size) {
+    int averageArray[size];
+    int i = 0;
+    int sum = 0;
+    float average;
+    for (i = 0; i < size; i++) {
+        printf("%d: ", i + 1);
+        scanf("%d", &averageArray[i]);
+        sum += averageArray[i];
+    }
+    average = sum / size;
+    printf("\nThe average of the %d numbers is %0.2f", size, average);
 
 }
 
