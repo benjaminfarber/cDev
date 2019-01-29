@@ -42,7 +42,7 @@ int main() {
     int factorialArgument;
     int base, exponent;
     int averageCount;
-    char operationChoice;
+    int operationChoice = 0;
     
     // END DEFINE VARIABLES
 
@@ -50,12 +50,10 @@ int main() {
     printf("\t-- by Ben Farber --\n");
 
     do {
-        operationChoice = '\0';
         displayCalculatorOperations();
-        printf("\nPlease choose an operation: ");
-        scanf("%c", &operationChoice);
+        scanf("%d", &operationChoice);
         switch(operationChoice) {
-            case '1':
+            case 1:
                 printf("\n\t-- ADDITION --\n");
                 printf("\nEnter a number: ");
                 scanf("%f", &add1);
@@ -63,7 +61,7 @@ int main() {
                 scanf("%f", &add2);
                 add2Numbers(add1, add2);
                 break;
-            case '2':
+            case 2:
                 printf("\n\t-- SUBTRACTION --\n");
                 printf("\nEnter a number: ");
                 scanf("%f", &sub1);
@@ -71,7 +69,7 @@ int main() {
                 scanf("%f", &sub2);
                 subtract2Numbers(sub1, sub2);       
                 break;
-            case '3':                
+            case 3:                
                 printf("\n\t-- MULTIPLICATION --\n");
                 printf("\nEnter a number: ");
                 scanf("%f", &mult1);
@@ -79,7 +77,7 @@ int main() {
                 scanf("%f", &mult2);
                 multiply2Numbers(mult1, mult2);     
                 break;
-            case '4':                
+            case 4:                
                 printf("\n\t-- DIVISION --\n"); 
                 printf("\nEnter a number: ");
                 scanf("%f", &div1);
@@ -87,7 +85,7 @@ int main() {
                 scanf("%f", &div2);
                 divide2Numbers(div1, div2);
                 break;
-            case '5':                
+            case 5:                
                 printf("\n\t-- MODULUS --\n");
                 printf("\nEnter a number: ");
                 scanf("%d", &mod1);
@@ -95,19 +93,19 @@ int main() {
                 scanf("%d", &mod2);
                 modulus2Numbers(mod1, mod2);
                 break;
-            case '6':                
+            case 6:                
                 printf("\n\t-- PRIME? --\n");
                 printf("\nEnter a number to test if it is prime: ");
                 scanf("%d", &primeArgument);
                 primeTest(primeArgument);
                 break;
-            case '7':                
+            case 7:                
                 printf("\n\t-- FACTORIAL --\n");
                 printf("\nEnter a number to calculate its factorial: ");
                 scanf("%d", &factorialArgument);
                 calcFactorial(factorialArgument);
                 break;
-            case '8':                
+            case 8:                
                 printf("\n-- POWER --\n");
                 printf("\nEnter the base: ");
                 scanf("%d", &base);
@@ -115,20 +113,20 @@ int main() {
                 scanf("%d", &exponent);
                 calcPower(base, exponent);
                 break;
-            case '9':                
+            case 9:                
                 printf("\n-- AVERAGE --\n");
-                printf("\nHow many numbers would you like to take the average of?");
+                printf("\nHow many numbers would you like\n");
+                printf("to take the average of?");
                 printf("\nEnter a number: ");
                 scanf("%d", &averageCount);
                 calcAverage(averageCount);
                 break;
-            case 'Q':
+            case 0:
                 printf("\nExiting calculator . . .\n\n");
                 break;
         }
-        pause(1);
-        system("clear");
-    } while (operationChoice != 'Q'); // Loops program unless 'Q' is entered
+        pause(2);
+    } while (operationChoice != 0); // Loops program unless 'Q' is entered
     return 0;
 } 
 
@@ -137,7 +135,7 @@ int main() {
 // BEGIN FUNCTION DEFINITIONS
 
 void displayCalculatorOperations(void) {
-    printf(" _______________________________________ \n");
+    printf("\n _______________________________________ \n");
     printf("|\t\t\t\t\t|\n");
     printf("|\tCalculator Operations:\t\t|\n");
     printf("|\t\t\t\t\t|\n");
@@ -148,6 +146,7 @@ void displayCalculatorOperations(void) {
     printf("|   [5] Modulus\t\t[Q] Exit\t|\n");
     printf("|\t\t\t\t\t|\n");
     printf("|_______________________________________|\n\n");
+    printf("\nPlease choose an operation: ");
 }
 
 void add2Numbers(float num1, float num2) {
