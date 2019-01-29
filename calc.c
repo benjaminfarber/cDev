@@ -106,7 +106,7 @@ int main() {
                 calcFactorial(factorialArgument);
                 break;
             case 8:                
-                printf("\n-- POWER --\n");
+                printf("\n\t-- POWER --\n");
                 printf("\nEnter the base: ");
                 scanf("%d", &base);
                 printf("\nEnter the exponent: ");
@@ -114,15 +114,18 @@ int main() {
                 calcPower(base, exponent);
                 break;
             case 9:                
-                printf("\n-- AVERAGE --\n");
+                printf("\n\t-- AVERAGE --\n");
                 printf("\nHow many numbers would you like\n");
-                printf("to take the average of?");
+                printf("to take the average of?\n");
                 printf("\nEnter a number: ");
                 scanf("%d", &averageCount);
                 calcAverage(averageCount);
                 break;
             case 0:
                 printf("\nExiting calculator . . .\n\n");
+                break;
+            default:
+                printf("\nInvalid response.\n\n");
                 break;
         }
         pause(2);
@@ -173,12 +176,14 @@ void divide2Numbers(float num1, float num2) {
     printf("\nAnswer = %0.2f\n", answer);
 }
 
+// TODO: only allow integers
 void modulus2Numbers(int num1, int num2) {
-    float answer;
+    int answer;
     answer = num1 % num2;
-    printf("\nAnswer = %0.2f\n", answer);
+    printf("\nAnswer = %d\n", answer);
 }
 
+// TODO: only allow positive integers
 void primeTest(int testNumber) {
     int p;
     int i;
@@ -198,34 +203,41 @@ void primeTest(int testNumber) {
             ++primeIndex;
         }
     }
-    if (testNumber == isPrime) {
-        printf("\n%d is prime", testNumber);
-    }
-    else {
-        printf("\n%d is not prime", testNumber);
-    }
 }
 
+// TODO: only allow positive integers
 void calcFactorial(int num) {
-
+    int i, minusOne;
+    unsigned long long int product; // inputs larger than 20 will not work
+    product = num;
+    minusOne = num;
+    for (i = 1; i < num; i ++) {
+        product *= --minusOne;
+    }
+    printf("\n%d! = %lld\n", num, product);
 }
 
+// TODO: only allow integers and add negative functionality
 void calcPower(int baseNum, int exponentNum) {
-
+    int i, product;
+    product = 1;
+    for (i = 0; i < exponentNum; i++) {
+        product *= baseNum;
+    }
+    printf("\n%d ^ %d = %d\n", baseNum, exponentNum, product);
 }
 
 void calcAverage(int size) {
-    int averageArray[size];
-    int i = 0;
-    int sum = 0;
-    float average;
+    float averageArray[size], sum, average;
+    int i;
+    sum = 0;
     for (i = 0; i < size; i++) {
         printf("%d: ", i + 1);
-        scanf("%d", &averageArray[i]);
+        scanf("%f", &averageArray[i]);
         sum += averageArray[i];
     }
     average = sum / size;
-    printf("\nThe average of the %d numbers is %0.2f", size, average);
+    printf("\nThe average of the %d numbers is %0.2f\n", size, average);
 
 }
 
