@@ -8,21 +8,23 @@ Program Description: A calculator that adds, subtracts, multiplies, divides,
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include <stdbool.h>
+#include <time.h>
 
 // BEGIN FUNCTION PROTOTYPES
 
-void displayCalculatorOperations(void);
-void add2Numbers(float, float);
-void subtract2Numbers(float, float);
-void multiply2Numbers(float, float);
-void divide2Numbers(float, float);
-void modulus2Numbers(int, int);
-void primeTest(int);
-void calcFactorial(int);
-void calcPower(int, int);
-void calcAverage(int);
+void displayCalculatorOperations(void);     // Show calculator options
+void add2Numbers(float, float);             // Input two floats to be added
+void subtract2Numbers(float, float);        // Input two floats to be subtracted
+void multiply2Numbers(float, float);        // Input two floats to be multiplied
+void divide2Numbers(float, float);          // Input two float to be divided
+void modulus2Numbers(int, int);             // Input two integers to take the modulus
+void primeTest(int);                        // Input a positive integer and test if it is prime
+void calcFactorial(int);                    // Input a positive integer and calculate its factorial
+void calcPower(float, int);                 // Input a float as a base and an integer as a exponent
+void calcAverage(int);                      // Input the number of numbers you want to average
+int floatToInt(float);                      // Input a float and convert it to an integer
+int intTest(float);                         // Test if a number is an integer
 void pause(int);
 
 // END FUNCTION PROTOTYPES
@@ -37,11 +39,12 @@ int main() {
     float sub1, sub2;
     float mult1, mult2;
     float div1, div2;
-    int mod1, mod2;
-    int primeArgument;
-    int factorialArgument;
-    int base, exponent;
-    int averageCount;
+    float mod1, mod2;
+    float primeArgument;
+    float factorialArgument;
+    float base, exponent;
+    float averageCount;
+    int pauseTime = 2;
     int operationChoice = 0;
     
     // END DEFINE VARIABLES
@@ -54,81 +57,102 @@ int main() {
         scanf("%d", &operationChoice);
         switch(operationChoice) {
             case 1:
-                printf("\n\t-- ADDITION --\n");
-                printf("\nEnter a number: ");
+                printf("\n\t-- ADDITION --\n\n");
+                printf("1: ");
                 scanf("%f", &add1);
-                printf("\n%0.2f + ", add1);
+                printf("2: ");
                 scanf("%f", &add2);
                 add2Numbers(add1, add2);
                 break;
             case 2:
-                printf("\n\t-- SUBTRACTION --\n");
-                printf("\nEnter a number: ");
+                printf("\n\t-- SUBTRACTION --\n\n");
+                printf("1: ");
                 scanf("%f", &sub1);
-                printf("\n%0.2f - ", sub1);
+                printf("2: ");
                 scanf("%f", &sub2);
                 subtract2Numbers(sub1, sub2);       
                 break;
             case 3:                
-                printf("\n\t-- MULTIPLICATION --\n");
-                printf("\nEnter a number: ");
+                printf("\n\t-- MULTIPLICATION --\n\n");
+                printf("1: ");
                 scanf("%f", &mult1);
-                printf("\n%0.2f x ", mult1);
+                printf("2: ");
                 scanf("%f", &mult2);
                 multiply2Numbers(mult1, mult2);     
                 break;
             case 4:                
-                printf("\n\t-- DIVISION --\n"); 
-                printf("\nEnter a number: ");
+                printf("\n\t-- DIVISION --\n\n"); 
+                printf("1: ");
                 scanf("%f", &div1);
-                printf("\n%0.2f / ", div1);
+                printf("2: ");
                 scanf("%f", &div2);
                 divide2Numbers(div1, div2);
                 break;
             case 5:                
-                printf("\n\t-- MODULUS --\n");
-                printf("\nEnter a number: ");
-                scanf("%d", &mod1);
-                printf("\n%d %% ", mod1);
-                scanf("%d", &mod2);
+                printf("\n\t-- MODULUS --\n\n");
+                do {
+                    printf("1: ");
+                    scanf("%f", &mod1);
+                    printf("2: ");
+                    scanf("%f", &mod2);
+                    if (intTest(mod1) != 1 || intTest(mod2) != 1 ||
+                        mod1 < 0 || mod2 < 0) {
+                        printf("\nYou must enter integers for this calcultion.\n\n");
+                    }
+                } while (intTest(mod1) != 1 || intTest(mod2) != 1 ||
+                         mod1 < 0 || mod2 < 0);
+                mod1 = floatToInt(mod1);
+                mod2 = floatToInt(mod2);
                 modulus2Numbers(mod1, mod2);
                 break;
             case 6:                
                 printf("\n\t-- PRIME? --\n");
-                printf("\nEnter a number to test if it is prime: ");
-                scanf("%d", &primeArgument);
+                do {
+                    printf("\nEnter a number: ");
+                    scanf("%f", &primeArgument);
+                    if (intTest(primeArgument) != 1 && primeArgument > 0) {
+                        printf("\nYou must enter an integer for this calcultion.\n");
+                    }
+                } while (intTest(primeArgument) != 1 && primeArgument > 0);
+                primeArgument = floatToInt(primeArgument);
                 primeTest(primeArgument);
                 break;
             case 7:                
                 printf("\n\t-- FACTORIAL --\n");
-                printf("\nEnter a number to calculate its factorial: ");
-                scanf("%d", &factorialArgument);
+                do {
+                    printf("\nEnter a number to calculate\n"); 
+                    printf("its factorial: ");
+                    scanf("%f", &factorialArgument);
+                    if (intTest(factorialArgument) != 1 && factorialArgument > 0) {
+                        printf("\nYou must enter a positive integer for this calcultion.\n");
+                    }
+                } while (intTest(factorialArgument) != 1 && factorialArgument > 0);
+                factorialArgument = floatToInt(factorialArgument);
                 calcFactorial(factorialArgument);
                 break;
             case 8:                
                 printf("\n\t-- POWER --\n");
                 printf("\nEnter the base: ");
-                scanf("%d", &base);
+                scanf("%f", &base);
                 printf("\nEnter the exponent: ");
-                scanf("%d", &exponent);
+                scanf("%f", &exponent);
                 calcPower(base, exponent);
                 break;
             case 9:                
                 printf("\n\t-- AVERAGE --\n");
                 printf("\nHow many numbers would you like\n");
-                printf("to take the average of?\n");
-                printf("\nEnter a number: ");
-                scanf("%d", &averageCount);
+                printf("to take the average of? -> ");
+                scanf("%f", &averageCount);
                 calcAverage(averageCount);
                 break;
             case 0:
-                printf("\nExiting calculator . . .\n\n");
+                printf("\nExiting calculator...\n");
                 break;
             default:
-                printf("\nInvalid response.\n\n");
+                printf("\nInvalid response.\n");
                 break;
         }
-        pause(2);
+        pause(pauseTime);
     } while (operationChoice != 0); // Loops program unless 'Q' is entered
     return 0;
 } 
@@ -155,57 +179,63 @@ void displayCalculatorOperations(void) {
 void add2Numbers(float num1, float num2) {
     float answer;
     answer = num1 + num2;
-    printf("\nAnswer = %0.2f\n", answer);
+    printf("\n%0.2f + %0.2f = %0.2f\n", num1, num2, answer);
 }
 
 void subtract2Numbers(float num1, float num2) {
     float answer;
     answer = num1 - num2;
-    printf("\nAnswer = %0.2f\n", answer);
+    printf("\n%0.2f - %0.2f = %0.2f\n", num1, num2, answer);
 }
 
 void multiply2Numbers(float num1, float num2) {
     float answer;
     answer = num1 * num2;
-    printf("\nAnswer = %0.2f\n", answer);
+    printf("\n%0.2f * %0.2f = %0.2f\n", num1, num2, answer);
 }
 
 void divide2Numbers(float num1, float num2) {
     float answer;
     answer = num1 / num2;
-    printf("\nAnswer = %0.2f\n", answer);
+    printf("\n%0.2f / %0.2f = %0.2f\n", num1, num2, answer);
 }
 
-// TODO: only allow integers
 void modulus2Numbers(int num1, int num2) {
     int answer;
     answer = num1 % num2;
-    printf("\nAnswer = %d\n", answer);
+    printf("\n%d %% %d = %d\n", num1, num2, answer);
 }
 
-// TODO: only allow positive integers
 void primeTest(int testNumber) {
-    int p;
-    int i;
-    int primes[testNumber];
-    int primeIndex = 2;
-    bool isPrime;
-    primes[0] = 2;
-    primes[1] = 3;
-    for (p = 5; p <= testNumber; p += 2) {
+    bool isPrime = true;
+    if (testNumber <= 1) {
+        printf("%d is not prime.\n", testNumber);
+        isPrime = false;
+    } // All negative numbers, 0, and 1 are not prime
+    else if (testNumber == 2) {
         isPrime = true;
-        for (i = 1; isPrime && p / primes[i] >= primes[i]; i++) {
-            if (p % primes[i] == 0)
+    } // 2 is a prime number
+    else if (testNumber % 2 == 0 && testNumber != 2) {
+        printf("%d is not prime.\n", testNumber);
+        printf("%d x 2 = %d\n", testNumber / 2, testNumber);
+        isPrime = false;
+    } // Even numbers (excluding 2) are not prime
+    else {
+        int denominatorInt = 0;
+        for (denominatorInt = 2; denominatorInt < (testNumber / 2); denominatorInt++) {
+            if (testNumber % denominatorInt == 0) {
+                printf("%d is not prime.\n", testNumber);
+                printf("%d x %d = %d\n", denominatorInt, testNumber / denominatorInt, testNumber);
                 isPrime = false;
-        }
-        if (isPrime == true) {
-            primes[primeIndex] = p;
-            ++primeIndex;
-        }
+                break;
+            } // Test if the input can be divided by all numbers between 2 and half the input
+        } // If the input cant be divided by numbers other than 1 and itself, it is prime
     }
+    if (isPrime) {
+        printf("%d is a prime number.\n", testNumber);
+    } // If no factors for the input are found, isNotPrime remains false (aka the number is prime)
 }
 
-// TODO: only allow positive integers
 void calcFactorial(int num) {
     int i, minusOne;
     unsigned long long int product; // inputs larger than 20 will not work
@@ -217,14 +247,13 @@ void calcFactorial(int num) {
     printf("\n%d! = %lld\n", num, product);
 }
 
-// TODO: only allow integers and add negative functionality
-void calcPower(int baseNum, int exponentNum) {
+void calcPower(float baseNum, int exponentNum) {
     int i, product;
     product = 1;
     for (i = 0; i < exponentNum; i++) {
         product *= baseNum;
     }
-    printf("\n%d ^ %d = %d\n", baseNum, exponentNum, product);
+    printf("\n%0.2f ^ %d = %d\n", baseNum, exponentNum, product);
 }
 
 void calcAverage(int size) {
@@ -239,6 +268,19 @@ void calcAverage(int size) {
     average = sum / size;
     printf("\nThe average of the %d numbers is %0.2f\n", size, average);
 
+}
+
+int floatToInt (float floatInput) {
+    int intOutput = floatInput;
+    return intOutput;
+}
+
+int intTest(float float1) {
+    int int1 = float1;
+    if (float1 - int1 == 0)
+        return 1;
+    else
+        return 0;
 }
 
 void pause(int inNum) {
