@@ -2,13 +2,8 @@
 #include<string.h>
 
 int main() {
-    char c[20];
-    c[0] = 'J';
-    c[1] = 'O';
-    c[2] = 'H';
-    c[3] = 'N';
-    c[4] = '\0';
-    int len = strlen(c);
-    printf("%s is %d characters long.", c, len);
+    char *myName = "Benjamin Edwards Farber";
+    int nameLength = strlen(myName);
+    printf("\"%s\" is %d characters long.\n", myName, nameLength);
     return 0;
 }
