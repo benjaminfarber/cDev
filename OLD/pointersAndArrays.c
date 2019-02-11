@@ -25,5 +25,20 @@ int main(void) {
     printf("\nthe address of the third element of the array (using indexing) is \t%p", &array[2]);
     printf("\nthe address of the third element of the array (using pointers) is \t%p\n\n", ptrA+2);
 
+    int A[] = {2,3,4,8,1};
+    int i;
+    printf("A[] = { ");
+    for (i=0; i<5; i++) {
+        printf("%d ", A[i]);
+    }
+    printf("}\n\n");
+    for (i=0; i<5; i++) {
+        printf("i        \t= %d\n", i);
+        printf("A + i    \t= %p\n", A+i);
+        printf("&A[i]    \t= %p\n", &A[i]);
+        printf("A[i]     \t= %d\n", A[i]);
+        printf("*(A + i) \t= %d\n\n", *(A+i));
+    }
+    
     return 0;
 }
