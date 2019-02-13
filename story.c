@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
 #include <stdlib.h>
 
 // BEGIN FUNCTION PROTOTYPES
@@ -24,68 +25,70 @@ int main() {
     printf("and a story will be generated from your input.\n\n");
 
     printf("-------------------------------------------------\n\n");
-    
-    const int maxInput = 25;
 
-    char yourFirstName[maxInput] = {'\0'};
+    // Gather information from user
+
+    char yourFirstName[25] = {'\0'};
     printf("What is your first name? ");
-    fgets(yourFirstName, maxInput, stdin);
+    fgets(yourFirstName, 25, stdin);
     
-    char hometown[maxInput] = {'\0'};
+    char hometown[25] = {'\0'};
     printf("What city are you from? ");
-    fgets(hometown, maxInput, stdin);
+    fgets(hometown, 25, stdin);
 
-    char favoriteFood[maxInput] = {'\0'};
+    char favoriteFood[25] = {'\0'};
     printf("What is your favorite food? ");
-    fgets(favoriteFood, maxInput, stdin);
+    fgets(favoriteFood, 25, stdin);
 
-    char personalDescription1[maxInput] = {'\0'};
+    char personalDescription1[25] = {'\0'};
     printf("What is an adjective you would use to describe yourself? ");
-    fgets(personalDescription1, maxInput, stdin);
+    fgets(personalDescription1, 25, stdin);
 
-    char personalDescription2[maxInput] = {'\0'};
+    char personalDescription2[25] = {'\0'};
     printf("What is another adjective you would use to describe yourself? ");
-    fgets(personalDescription2, maxInput, stdin);
+    fgets(personalDescription2, 25, stdin);
 
-    char personalDescription3[maxInput] = {'\0'};
+    char personalDescription3[25] = {'\0'};
     printf("What is another adjective you would use to describe yourself? ");
-    fgets(personalDescription3, maxInput, stdin);
+    fgets(personalDescription3, 25, stdin);
 
-    char petName[maxInput] = {'\0'};
+    char petName[25] = {'\0'};
     printf("What is your pet's name? ");
-    fgets(petName, maxInput, stdin);
+    fgets(petName, 25, stdin);
 
-    char lastFood[maxInput] = {'\0'};
+    char lastFood[25] = {'\0'};
     printf("What is the last thing you ate? ");
-    fgets(lastFood, maxInput, stdin);
+    fgets(lastFood, 25, stdin);
 
-    char favoritePlace[maxInput] = {'\0'};
+    char favoritePlace[25] = {'\0'};
     printf("What is your favorite city? ");
-    fgets(favoritePlace, maxInput, stdin);
+    fgets(favoritePlace, 25, stdin);
 
-    char yourJob[maxInput] = {'\0'};
+    char yourJob[25] = {'\0'};
     printf("What is your job? ");
-    fgets(yourJob, maxInput, stdin);
+    fgets(yourJob, 25, stdin);
 
-    char yourDreamJob[maxInput] = {'\0'};
+    char yourDreamJob[25] = {'\0'};
     printf("What is your dream job? ");
-    fgets(yourDreamJob, maxInput, stdin);
+    fgets(yourDreamJob, 25, stdin);
 
-    char grossFood[maxInput] = {'\0'};
+    char grossFood[25] = {'\0'};
     printf("What is the worst thing you've ever eaten? ");
-    fgets(grossFood, maxInput, stdin);
+    fgets(grossFood, 25, stdin);
 
-    char bestFriend[maxInput] = {'\0'};
+    char bestFriend[25] = {'\0'};
     printf("Who is your best friend? ");
-    fgets(bestFriend, maxInput, stdin);
+    fgets(bestFriend, 25, stdin);
 
-    char parentJob[maxInput] = {'\0'};
+    char parentJob[25] = {'\0'};
     printf("What is one of your parent's job? ");
-    fgets(parentJob, maxInput, stdin);
+    fgets(parentJob, 25, stdin);
 
-    char vacation[maxInput] = {'\0'};
+    char vacation[25] = {'\0'};
     printf("Where is the last place you went on vacation to? ");
-    fgets(vacation, maxInput, stdin);
+    fgets(vacation, 25, stdin);
+
+    // Build arrays of strings to store user data
 
     char *names[3] = {yourFirstName, petName, bestFriend};
     
@@ -97,7 +100,7 @@ int main() {
 
     char *job[3] = {yourJob, yourDreamJob, parentJob};
 
-    printf("-------------------------------------------------\n\n");
+    printf("\n-------------------------------------------------\n");
     printf("Generating Story...\n");
     printf("-------------------------------------------------\n\n");
 
@@ -142,6 +145,8 @@ int main() {
     char *vacationPlace = places[generateRandomNumber(3)];
     while (strcmp(childhoodPlace, vacationPlace) == 0 || strcmp(currentPlace, vacationPlace) == 0)
         vacationPlace = places[generateRandomNumber(3)];
+
+    // Print story
 
     printf("This is a story about %s %s. Every day, when %s wakes up,\n", adj1, mainCharacter, mainCharacter);
     printf("%s has to make breakfast. Today, %s decided to make %s.\n", mainCharacter, mainCharacter, breakfast);
