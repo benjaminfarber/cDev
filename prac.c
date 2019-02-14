@@ -18,8 +18,8 @@
 
 int generateRandomNumber(int);
 void getString(char *, int);
-char* capitalize(char *);
-char* uncapitalize(char *);
+// void capitalize(char *);
+// void uncapitalize(char *);
 
 // END FUNCTION PROTOTYPES
 
@@ -174,14 +174,10 @@ void getString(char *str, int size) {
     str[strlen(str)-1] = '\0';                      // Replace '\n' from fgets() with '\0' for formatting.
 }
 
-char* capitalize(char *str) {
-    str[0] = toupper(str[0]);
-    return str;
-}
+// void capitalize(char *) {
+// }
 
-char* uncapitalize(char *str) {
-    str[0] = tolower(str[0]);
-    return str;
-}
+// void uncapitalize(char *) {
+// }
 
 // END FUNCTION DEFINITIONS
