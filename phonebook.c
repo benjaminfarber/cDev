@@ -39,9 +39,9 @@ int main(void) {
                 break;
             case 2:
                 printf("\nDelete Contact\n\n");
-                contactIndex--;
                 displayContactList(contactList, &contactIndex);
                 deleteContact(contactList, &contactIndex);
+                contactIndex--;
                 break;
             case 3:
                 printf("\nYour Contacts:\n\n");
@@ -79,16 +79,25 @@ void createContact(contact contactList[], int *contactIndex) {
 }
 
 void deleteContact(contact contactList[], int * contactIndex) {
+    int counter;
     int contactNumberToDelete;
+    printf("Delete Contact # ");
+    scanf("%d", &contactNumberToDelete);
+    for (counter = contactNumberToDelete; counter <= *contactIndex; counter++) {
+		strcpy(contactList[contactNumberToDelete].firstName, contactList[contactNumberToDelete+1].firstName);
+		strcpy(contactList[contactNumberToDelete].lastName, contactList[contactNumberToDelete+1].lastName);
+        strcpy(contactList[contactNumberToDelete].phoneNumber, contactList[contactNumberToDelete+1].phoneNumber);
+	}
+    printf("%s %s has been deleted from your contacts.",contactList[contactNumberToDelete-1].firstName, contactList[contactNumberToDelete-1].lastName);
 }
 
 void displayContactList(contact contactList[], int * contactIndex) {
     int i;
     for (i = 1; i <= *contactIndex; i++) {
-        printf("Contact [%d] -------------\n", i);
+        printf("Contact #%d --------------\n", i);
         printf("First Name: %s\n", contactList[i].firstName);
         printf("Last Name: %s\n", contactList[i].lastName);
         printf("Phone Number: %s\n", contactList[i].phoneNumber);
-        printf("---------------------------\n\n");
+        printf("-------------------------\n\n");
     }
 }
