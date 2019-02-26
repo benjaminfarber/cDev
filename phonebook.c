@@ -82,7 +82,7 @@ void deleteContact(contact contactList[], int *numberOfContacts) {
     int counter;
     int contactNumberToDelete;
     if (*numberOfContacts == 0) {
-        printf("~no contacts to delete~");
+        printf("No contacts to delete :(\n");
     } else {
         printf("Delete Contact # ");
         scanf("%d", &contactNumberToDelete);
@@ -97,7 +97,7 @@ void deleteContact(contact contactList[], int *numberOfContacts) {
 void displayContactList(contact contactList[], int *numberOfContacts) {
     int i;
     if (*numberOfContacts == 0) {
-        printf("~no contacts~");
+        printf("You haven't created any contacts yet.\n");
     } else {
         for (i = 1; i <= *numberOfContacts; i++) {
             printf("Contact #%d --------------\n", i);
