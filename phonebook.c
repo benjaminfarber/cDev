@@ -15,7 +15,7 @@ void displayContactList(contact[], int *);
 char* capitalize(char *);
 
 int main(void) {
-    int contactIndex = 0;
+    int numberOfContacts = 0;
     contact *contactList = (contact*)calloc(sizeof(contactList), 1);
     int action = 0;
     do {
@@ -30,28 +30,28 @@ int main(void) {
         switch(action) {
             case 1:
                 printf("\nCreate Contact\n\n");
-                contactIndex++;
-                contactList=(contact*)realloc(contactList,sizeof(contact)*(contactIndex));
-	            if (contactList == NULL){
+                numberOfContacts++;
+                contactList = (contact*)realloc(contactList, sizeof(contactList)*(numberOfContacts));
+	            if (!contactList) {
 		            printf("Could not allocate memory.");
 	            }                
-                createContact(contactList, &contactIndex);
+                createContact(contactList, &numberOfContacts);
                 break;
             case 2:
                 printf("\nDelete Contact\n\n");
-                displayContactList(contactList, &contactIndex);
-                deleteContact(contactList, &contactIndex);
-                contactIndex--;
+                displayContactList(contactList, &numberOfContacts);
+                deleteContact(contactList, &numberOfContacts);
+                numberOfContacts--;
                 break;
             case 3:
                 printf("\nYour Contacts:\n\n");
-                displayContactList(contactList, &contactIndex);
+                displayContactList(contactList, &numberOfContacts);
                 break;
             case 4:
                 printf("Exiting Contacts . . .\n\n");
                 break;
             default:
-                printf("That input is not valid.");
+                printf("Ivalid Input.");
                 break;
         }
     } while (action != 4);
@@ -63,10 +63,10 @@ char* capitalize(char *str) {
     return str;
 }
 
-void createContact(contact contactList[], int *contactIndex) {
-    char *firstName = contactList[*contactIndex].firstName;
-    char *lastName = contactList[*contactIndex].lastName;
-    char *phoneNumber = contactList[*contactIndex].phoneNumber;    
+void createContact(contact contactList[], int *numberOfContacts) {
+    char *firstName = contactList[*(numberOfContacts)].firstName;
+    char *lastName = contactList[*(numberOfContacts)].lastName;
+    char *phoneNumber = contactList[*(numberOfContacts)].phoneNumber; 
     printf("\nFirst Name: ");
     scanf("%s", firstName);
     capitalize(firstName);
@@ -78,26 +78,33 @@ void createContact(contact contactList[], int *contactIndex) {
     printf("\n%s %s has been added to your contact list.\n", firstName, lastName);
 }
 
-void deleteContact(contact contactList[], int * contactIndex) {
+void deleteContact(contact contactList[], int *numberOfContacts) {
     int counter;
     int contactNumberToDelete;
-    printf("Delete Contact # ");
-    scanf("%d", &contactNumberToDelete);
-    for (counter = contactNumberToDelete; counter <= *contactIndex; counter++) {
-		strcpy(contactList[contactNumberToDelete].firstName, contactList[contactNumberToDelete+1].firstName);
-		strcpy(contactList[contactNumberToDelete].lastName, contactList[contactNumberToDelete+1].lastName);
-        strcpy(contactList[contactNumberToDelete].phoneNumber, contactList[contactNumberToDelete+1].phoneNumber);
-	}
-    printf("%s %s has been deleted from your contacts.",contactList[contactNumberToDelete-1].firstName, contactList[contactNumberToDelete-1].lastName);
+    if (*numberOfContacts == 0) {
+        printf("~no contacts to delete~");
+    } else {
+        printf("Delete Contact # ");
+        scanf("%d", &contactNumberToDelete);
+        for (counter = contactNumberToDelete; counter <= *numberOfContacts; counter++) {
+		    strcpy(contactList[counter].firstName, contactList[counter+1].firstName);
+		    strcpy(contactList[counter].lastName, contactList[counter+1].lastName);
+            strcpy(contactList[counter].phoneNumber, contactList[counter+1].phoneNumber);
+	    }
+    }
 }
 
-void displayContactList(contact contactList[], int * contactIndex) {
+void displayContactList(contact contactList[], int *numberOfContacts) {
     int i;
-    for (i = 1; i <= *contactIndex; i++) {
-        printf("Contact #%d --------------\n", i);
-        printf("First Name: %s\n", contactList[i].firstName);
-        printf("Last Name: %s\n", contactList[i].lastName);
-        printf("Phone Number: %s\n", contactList[i].phoneNumber);
-        printf("-------------------------\n\n");
+    if (*numberOfContacts == 0) {
+        printf("~no contacts~");
+    } else {
+        for (i = 1; i <= *numberOfContacts; i++) {
+            printf("Contact #%d --------------\n", i);
+            printf("First Name: %s\n", contactList[i].firstName);
+            printf("Last Name: %s\n", contactList[i].lastName);
+            printf("Phone Number: %s\n", contactList[i].phoneNumber);
+            printf("-------------------------\n\n");
+        }
     }
 }
